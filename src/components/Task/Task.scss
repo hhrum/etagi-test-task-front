@@ -1,0 +1,56 @@
+@import "src/assets/style/variables.module";
+
+.task {
+  background-color: $white-color;
+  
+  padding: 24px;
+  border-radius: $border-size;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  box-shadow: 0 0 10px $shadow-color;
+
+  transition: $transition-time;
+
+  &--completed {
+    background-color: $gray-color;
+
+    box-shadow: none;
+  }
+
+  &__input {
+    transition: $transition-time;
+  }
+
+  &__title {
+    position: relative;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    transition: $transition-time;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      top: calc(50% + 1px);
+
+      height: 2px;
+      background-color: $font-color;
+
+      transition: right $transition-time;
+    }
+  }
+
+  &--completed &__title {
+    font-weight: normal;
+
+    &:after {
+      right: 0;
+    }
+  }
+}
