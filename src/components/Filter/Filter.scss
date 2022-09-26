@@ -1,0 +1,37 @@
+@import "src/assets/style/variables.module";
+
+.filter {
+  padding: 24px;
+  border-radius: $border-size;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  box-shadow: 0 0 10px $shadow-color;
+
+  &__select-label {
+    font-size: 14px;
+    margin-bottom: -12px;
+
+    color: $font-secondary-color;
+  }
+
+  &__select {
+    background-color: $gray-color;
+    padding: 12px;
+    border-radius: $border-size;
+    border: none;
+  }
+
+  &__button {
+    background-color: $accent-color;
+    padding: 12px;
+    border-radius: $border-size;
+    border: none;
+
+    color: $white-color;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}

@@ -1,23 +1,16 @@
 import React, {useId} from 'react';
 import classnames from 'classnames';
 
-import './Task.scss';
+import TaskProps from './Task.types';
 
-export interface TaskProps {
-  id: number
-  title: string
-  state: boolean
-  start_date: Date
-  finish_date: Date
-  description: string
-}
+import './Task.scss';
 
 function Task({
   id,
   title,
   state,
-  start_date,
-  finish_date,
+  startDate,
+  finishDate,
   description
 }:TaskProps) {
   const inputId = useId();

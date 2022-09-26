@@ -1,0 +1,20 @@
+@import "src/assets/style/variables.module";
+
+.pagination-item {
+  background-color: $white-color;
+  width: 48px;
+  height: 48px;
+  border-radius: $border-size;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px $shadow-color;
+
+  &--current {
+    background-color: $gray-color;
+
+    box-shadow: none;
+  }
+}

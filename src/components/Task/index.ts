@@ -1,4 +1,4 @@
-import Task, {TaskProps} from './Task';
+import Task from './Task';
 
 export default Task;
-export type { TaskProps };
+export type { default as TaskProps } from './Task.types';
