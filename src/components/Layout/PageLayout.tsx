@@ -7,19 +7,23 @@ import './PageLayout.scss';
 
 function PageLayout({
   className,
+  headerClassName,
+  contentClassName,
   header,
   children
 }: PageLayoutProps) {
   
-  const layoutClassName = classnames('page-layout', className);
-  
+  const layoutClass = classnames('page-layout', className);
+  const headerClass = classnames('page-layout__header', headerClassName);
+  const contentClass = classnames('page-layout__content', contentClassName);
+
   return (
-    <div className={layoutClassName}>
+    <div className={layoutClass}>
       {header &&
-        <div className="page-layout__header">{header}</div>
+        <div className={headerClass}>{header}</div>
       }
 
-      <div className="page-layout__content">
+      <div className={contentClass}>
         {children}
       </div>
     </div>

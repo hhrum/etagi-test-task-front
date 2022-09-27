@@ -1,5 +1,5 @@
 interface RippleProps {
-  duration: number,
+  duration?: number,
 }
 
 interface RippleCircleProps {

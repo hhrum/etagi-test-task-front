@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Ripple from '../Ripple';
+
 import FilterProps, {filterBys, FilterValue, filterValues} from './Filter.types';
 
 import './Filter.scss';
@@ -43,7 +45,11 @@ function Filter({
         ))}
       </select>
 
-      <button type="submit" className="filter__button">Применить</button>
+      <button type="submit" className="filter__button">
+        Применить
+        
+        <Ripple />
+      </button>
     </div>
   );
 }

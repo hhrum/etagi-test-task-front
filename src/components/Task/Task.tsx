@@ -8,15 +8,18 @@ import useLongClick from '../../hooks/useLongClick';
 import TaskProps from './Task.types';
 
 import './Task.scss';
+import task from './index';
+import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 
 function Task({
   id,
-  title,
-  state,
-  startDate,
-  finishDate,
-  description
 }:TaskProps) {
+  const task = useAppSelector(getTaskById(id));
+  
+  if (!task) {
+    return <div />;
+  }
+  
   const inputId = useId();
   const [navigate, setNavigate] = useState(false);
 
@@ -30,7 +33,7 @@ function Task({
   });
 
   const componentClassName = classnames('task', {
-    'task--completed': state,
+    'task--completed': task.completed,
     'task--pressed': pressed
   });
 
@@ -45,7 +48,7 @@ function Task({
       onMouseLeave={mouseLeaveHandler}
     >
       <input id={inputId} type="checkbox" className="task__input" />
-      <div className="task__title">{title}</div>
+      <div className="task__title">{task.title}</div>
 
       <Ripple duration={1000} />
       {navigate &&

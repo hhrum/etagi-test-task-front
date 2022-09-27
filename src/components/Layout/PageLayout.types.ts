@@ -1,5 +1,7 @@
 interface PageLayoutProps {
-  className: string
+  className?: string
+  headerClassName?: string
+  contentClassName?: string
   header?: JSX.Element
   children?: JSX.Element|JSX.Element[]
 }

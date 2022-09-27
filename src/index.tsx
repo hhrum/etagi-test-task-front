@@ -1,25 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-  createHashRouter,
   RouterProvider
 } from 'react-router-dom';
+import {Provider} from 'react-redux';
 
-import RootPage from './pages/RootPage';
-import TaskPage, {TaskPageLoader} from './pages/TaskPage';
+import store from './store/store';
+import router from './router/router';
 
 import './index.scss';
-
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <RootPage />,
-  },
-  {
-    path: '/task/:id',
-    element: <TaskPage />,
-  }
-]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,6 +16,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

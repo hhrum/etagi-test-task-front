@@ -5,28 +5,21 @@ import Task from '../../components/Task';
 import Pagination from '../../components/Pagination';
 
 import './RootPage.scss';
+import useAppSelector from '../../hooks/useAppSelector';
 
 function RootPage() {
+  const tasks = useAppSelector((state) => state.tasks.data);
+  
   return (
     <div className="root">
       <h1>Ваш список задач</h1>
       <Filter filterValue={FilterValue.None} filterBy={FilterBy.None} />
-      <Task
-        id={1}
-        title="Выполнить действие"
-        state={false}
-        startDate={new Date()}
-        finishDate={new Date()}
-        description="Какое-то описание"
-      />
-      <Task
-        id={2}
-        title="Выполнить действие"
-        state={true}
-        startDate={new Date()}
-        finishDate={new Date()}
-        description="Какое-то описание"
-      />
+      {tasks.map(task => (
+        <Task
+          key={task.id}
+          id={task.id}
+        />
+      ))}
       <Pagination currentPage={1} />
     </div>
   );
