@@ -10,14 +10,17 @@ const useLongClick = (
   const [pressTimeout, setPressTimeout] = useState<number|undefined|ReturnType<typeof setTimeout>>(undefined);
   
   const mouseDownHandler = () => {
+    setPressed(true);
     setMouseLeave(false);
+    
     setPressTimeout(setTimeout(() => {
-      setPressed(true);
       setPressTimeout(undefined);
-    }, 1000));
+    }, 600));
   };
   
   const mouseUpHandler = (e:MouseEvent|TouchEvent) => {
+    setPressed(false);
+
     if (pressTimeout) {
       clearTimeout(pressTimeout);
       setPressTimeout(undefined);
@@ -30,17 +33,15 @@ const useLongClick = (
       return;
     }
 
-    if (pressed) {
-      clickCallback();
-      
-      setPressed(false);
-      if (preventDefault) {
-        e.preventDefault();
-      }
+    clickCallback();
+
+    if (preventDefault) {
+      e.preventDefault();
     }
   };
   
   const mouseLeaveHandler = () => {
+    setPressed(false);
     setMouseLeave(true);
     if (pressTimeout) {
       clearTimeout(pressTimeout);
@@ -49,6 +50,7 @@ const useLongClick = (
   };
   
   return {
+    pressed,
     mouseDownHandler,
     mouseUpHandler,
     mouseLeaveHandler
