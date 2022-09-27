@@ -1,11 +1,29 @@
 import React from 'react';
+import classnames from 'classnames';
 
-import LayoutProps from './Layout.types';
+import PageLayoutProps from './PageLayout.types';
 
-import './Layout.scss';
+import './PageLayout.scss';
 
-function Layout({}: LayoutProps) {
-  return (<></>);
+function PageLayout({
+  className,
+  header,
+  children
+}: PageLayoutProps) {
+  
+  const layoutClassName = classnames('page-layout', className);
+  
+  return (
+    <div className={layoutClassName}>
+      {header &&
+        <div className="page-layout__header">{header}</div>
+      }
+
+      <div className="page-layout__content">
+        {children}
+      </div>
+    </div>
+  );
 }
 
-export default Layout;
+export default PageLayout;

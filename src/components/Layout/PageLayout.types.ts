@@ -1,6 +1,7 @@
-interface LayoutProps {
-  header: JSX.Element
-  children?: JSX.Element
+interface PageLayoutProps {
+  className: string
+  header?: JSX.Element
+  children?: JSX.Element|JSX.Element[]
 }
 
-export default LayoutProps;
+export default PageLayoutProps;

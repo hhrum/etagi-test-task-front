@@ -6,18 +6,18 @@ import {
 } from 'react-router-dom';
 
 import RootPage from './pages/RootPage';
-import TaskPage from './pages/TaskPage';
+import TaskPage, {TaskPageLoader} from './pages/TaskPage';
 
 import './index.scss';
 
 const router = createHashRouter([
   {
     path: '/',
-    element: <RootPage />
+    element: <RootPage />,
   },
   {
-    path: '/task',
-    element: <TaskPage />
+    path: '/task/:id',
+    element: <TaskPage />,
   }
 ]);
 

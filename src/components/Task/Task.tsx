@@ -49,7 +49,7 @@ function Task({
 
       <Ripple duration={1000} />
       {navigate &&
-        <Navigate to="/task" />
+        <Navigate to={'/task/' + id} />
       }
     </label>
   );

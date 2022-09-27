@@ -1,0 +1,23 @@
+@import "src/assets/style/variables.module";
+
+.page-layout {
+  position: relative;
+
+  max-width: 100vw;
+  min-width: 100vw;
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &__header {
+    height: $header-height;
+  }
+
+  &__content {
+    flex: 1 1;
+  }
+}

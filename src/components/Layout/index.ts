@@ -1,4 +1,4 @@
-import Layout from './Layout';
+import PageLayout from './PageLayout';
 
-export default Layout;
-export type { default as LayoutProps } from './Layout.types';
+export default PageLayout;
+export type {default as LayoutProps} from './PageLayout.types';
