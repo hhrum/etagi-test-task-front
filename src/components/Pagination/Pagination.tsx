@@ -2,19 +2,23 @@ import React from 'react';
 
 import PaginationItem from '../PaginationItem';
 
-import PaginationProps from './Pagination.types';
-
 import './Pagination.scss';
+import useAppSelector, {getCurrentPage, getTotalPages} from '../../hooks/useAppSelector';
 
-function Pagination({
-  currentPage
-}: PaginationProps) {
-
-  const pages = [1, 2, 3];
+function Pagination() {
+  
+  const currentPage = useAppSelector(getCurrentPage);
+  const totalPages = useAppSelector(getTotalPages);
 
   return (
     <div className="pagination">
-      {pages.map(item => <PaginationItem key={item} page={item} isCurrent={item === currentPage} />)}
+      {(new Array(totalPages)).fill(null).map((_, i) =>
+        <PaginationItem
+          key={i + 1}
+          page={i + 1}
+          isCurrent={i + 1 === currentPage}
+        />
+      )}
     </div>
   );
 }

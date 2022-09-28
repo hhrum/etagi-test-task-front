@@ -12,6 +12,7 @@ interface Task {
 interface TasksSlice {
   data: Task[]
   lastIndex: number
+  currentPage: number
 }
 
 const initialState = {
@@ -25,7 +26,8 @@ const initialState = {
       description: 'Описание',
     }
   ],
-  lastIndex: 1
+  lastIndex: 1,
+  currentPage: 2,
 } as TasksSlice;
 
 const tasksSlice = createSlice({
@@ -40,9 +42,20 @@ const tasksSlice = createSlice({
       }
       
       task.completed = !task.completed;
+    },
+    
+    setCurrentPage(state, action: PayloadAction<number>) {
+      if (action.payload < 1 || action.payload > Math.ceil(state.data.length / 15)) {
+        return;
+      }
+      
+      state.currentPage = action.payload;
     }
   }
 });
 
-export const { toggleCompleteById } = tasksSlice.actions;
+export const {
+  toggleCompleteById,
+  setCurrentPage
+} = tasksSlice.actions;
 export default tasksSlice.reducer;

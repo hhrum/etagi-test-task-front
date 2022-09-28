@@ -9,13 +9,17 @@ function PageLayout({
   className,
   headerClassName,
   contentClassName,
+  toolsClassName,
+
   header,
-  children
+  children,
+  tools,
 }: PageLayoutProps) {
   
   const layoutClass = classnames('page-layout', className);
   const headerClass = classnames('page-layout__header', headerClassName);
   const contentClass = classnames('page-layout__content', contentClassName);
+  const toolsClass = classnames('page-layout__tools', toolsClassName);
 
   return (
     <div className={layoutClass}>
@@ -25,6 +29,10 @@ function PageLayout({
 
       <div className={contentClass}>
         {children}
+      </div>
+
+      <div className={toolsClass}>
+        {tools}
       </div>
     </div>
   );

@@ -1,7 +1,33 @@
-.root {
-  padding: 24px;
+@import "src/assets/style/variables.module";
 
+.root {
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.root-tool-button {
+  position: relative;
+
+  background-color: $accent-color;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 0 10px $shadow-color;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    color: $white-color;
+
+    * {
+      color: $white-color;
+    }
+  }
 }

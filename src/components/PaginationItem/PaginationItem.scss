@@ -1,6 +1,8 @@
 @import "src/assets/style/variables.module";
 
 .pagination-item {
+  position: relative;
+
   background-color: $white-color;
   width: 48px;
   height: 48px;
@@ -10,11 +12,15 @@
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
   box-shadow: 0 0 10px $shadow-color;
+
+  transition: $transition-time;
 
   &--current {
     background-color: $gray-color;
 
+    cursor: default;
     box-shadow: none;
   }
 }

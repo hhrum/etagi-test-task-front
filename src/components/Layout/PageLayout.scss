@@ -21,4 +21,10 @@
   &__content {
     flex: 1 1;
   }
+
+  &__tools {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+  }
 }
