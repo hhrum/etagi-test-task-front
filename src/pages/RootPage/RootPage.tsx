@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {MdAdd} from 'react-icons/md';
 
 import Filter, {FilterBy, FilterValue} from '../../components/Filter';
@@ -11,6 +11,8 @@ import Ripple from '../../components/Ripple';
 import './RootPage.scss';
 
 function RootPage() {
+  const [redirect, setRedirect] = useState<string|null>(null);
+
   const tasks = useAppSelector(getTasks);
   
   return (
@@ -18,13 +20,18 @@ function RootPage() {
       contentClassName="root"
       tools={
         <div className="root__tools">
-          <div className="root-tool-button">
+          <div 
+            className="root-tool-button" 
+            onClick={() => setTimeout(() => setRedirect('/task/create'), 500)}
+          >
             <MdAdd />
 
             <Ripple />
           </div>
         </div>
       }
+
+      redirect={redirect}
     >
       <h1>Ваш список задач</h1>
       <Filter filterValue={FilterValue.None} filterBy={FilterBy.None} />

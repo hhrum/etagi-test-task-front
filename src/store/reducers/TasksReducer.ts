@@ -9,6 +9,13 @@ interface Task {
   description: string
 }
 
+interface CreateTaskAction {
+  title: string
+  startDate: Date
+  finishDate: Date
+  description: string
+}
+
 interface TasksSlice {
   data: Task[]
   lastIndex: number
@@ -34,6 +41,17 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
+    createTask(state, action: PayloadAction<CreateTaskAction>) {
+      const task = {
+        id: state.lastIndex + 1,
+        completed: false,
+        ...action.payload
+      } as Task;
+      
+      state.lastIndex += 1;
+      state.data.push(task);
+    },
+
     toggleCompleteById(state, action: PayloadAction<number>) {
       const task = state.data.find(task => task.id === action.payload);
       
@@ -55,6 +73,7 @@ const tasksSlice = createSlice({
 });
 
 export const {
+  createTask,
   toggleCompleteById,
   setCurrentPage
 } = tasksSlice.actions;

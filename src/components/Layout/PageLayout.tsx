@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import PageLayoutProps from './PageLayout.types';
 
 import './PageLayout.scss';
+import {Navigate} from 'react-router-dom';
 
 function PageLayout({
   className,
@@ -14,6 +15,8 @@ function PageLayout({
   header,
   children,
   tools,
+
+  redirect,
 }: PageLayoutProps) {
   
   const layoutClass = classnames('page-layout', className);
@@ -34,6 +37,10 @@ function PageLayout({
       <div className={toolsClass}>
         {tools}
       </div>
+
+      {redirect && 
+        <Navigate to={redirect} />
+      }
     </div>
   );
 }

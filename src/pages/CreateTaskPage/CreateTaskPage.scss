@@ -1,0 +1,33 @@
+@import "src/assets/style/variables.module";
+
+.create-task-page {
+}
+
+.create-task-page-header {
+
+  &__back {
+    position: relative;
+
+    width: $header-height;
+    height: $header-height;
+    border-radius: $header-height;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 28px;
+      height: 28px;
+
+      color: $font-color;
+    }
+  }
+}
+
+.create-task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+}

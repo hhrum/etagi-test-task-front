@@ -7,6 +7,8 @@ interface PageLayoutProps {
   header?: JSX.Element
   children?: JSX.Element|JSX.Element[]
   tools?: JSX.Element
+
+  redirect?: string|null
 }
 
 export default PageLayoutProps;

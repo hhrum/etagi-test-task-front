@@ -5,6 +5,7 @@ import Ripple from '../Ripple';
 import FilterProps, {filterBys, FilterValue, filterValues} from './Filter.types';
 
 import './Filter.scss';
+import Button from '../Button';
 
 function Filter({
   filterValue = FilterValue.None,
@@ -45,11 +46,7 @@ function Filter({
         ))}
       </select>
 
-      <button type="submit" className="filter__button">
-        Применить
-        
-        <Ripple />
-      </button>
+      <Button content="Применить" className="filter__button" />
     </div>
   );
 }

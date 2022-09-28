@@ -1,0 +1,17 @@
+@import "src/assets/style/variables.module";
+
+.header {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+
+  height: $header-height;
+  border-radius: $border-size;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  box-shadow: 0 0 10px $shadow-color;
+}

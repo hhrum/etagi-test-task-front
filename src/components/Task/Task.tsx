@@ -5,13 +5,14 @@ import classnames from 'classnames';
 import Ripple from '../Ripple';
 import useLongClick from '../../hooks/useLongClick';
 
-import TaskProps from './Task.types';
-
-import './Task.scss';
-import task from './index';
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {toggleCompleteById} from '../../store/reducers/TasksReducer';
+
+import TaskProps from './Task.types';
+
+import './Task.scss';
+
 
 function Task({
   id,

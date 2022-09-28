@@ -1,0 +1,37 @@
+@import "src/assets/style/variables.module";
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+
+  &__label {
+    font-size: 14px;
+
+    transition: $transition-time;
+
+    &--active {
+      font-weight: 500;
+    }
+  }
+
+  &__input {
+    background-color: $gray-color;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: $border-size;
+    border: none;
+
+    font-size: 16px;
+
+    opacity: 0.7;
+
+    transition: $transition-time;
+
+    &:focus {
+      opacity: 1;
+      outline: none;
+    }
+  }
+}

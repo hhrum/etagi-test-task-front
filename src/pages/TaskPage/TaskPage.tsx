@@ -5,10 +5,12 @@ import {
 } from 'react-icons/md';
 
 import PageLayout from '../../components/Layout';
+import Header from '../../components/Header';
 
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 
 import './TaskPage.scss';
+import date from '../../utils/date';
 
 function TaskPage() {
   const customMatch = useMatch('/task/:id');
@@ -26,12 +28,12 @@ function TaskPage() {
   return (
     <PageLayout 
       header={
-        <div className="task-page-header">
+        <Header className="task-page-header">
           <NavLink to="/" className="task-page-header__back">
             <MdArrowBack />
           </NavLink>
           <h2>{task.title}</h2>
-        </div>
+        </Header>
       }
       contentClassName="task-page"
     >
@@ -46,13 +48,13 @@ function TaskPage() {
       <div className="task-page__field">
         <div className="field">
           <div className="field__title">Дата начала</div>
-          <div className="field__content">{task.startDate.toString()}</div>
+          <div className="field__content">{date(task.startDate).format('D MMM YYYYг.')}</div>
         </div>
       </div>
       <div className="task-page__field">
         <div className="field">
           <div className="field__title">Дата окончания</div>
-          <div className="field__content">{task.finishDate.toString()}</div>
+          <div className="field__content">{date(task.finishDate).format('D MMM YYYYг.')}</div>
         </div>
       </div>
       <div className="task-page__field">
