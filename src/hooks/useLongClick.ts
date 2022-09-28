@@ -2,7 +2,8 @@ import {MouseEvent, TouchEvent, useState} from 'react';
 
 
 const useLongClick = (
-  clickCallback: () => void,
+  longClickCallback: () => void,
+  clickCallback: () => void = () => null,
   preventDefault = true
 ) => {
   const [pressed, setPressed] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const useLongClick = (
     if (pressTimeout) {
       clearTimeout(pressTimeout);
       setPressTimeout(undefined);
-
+      clickCallback();
       return;
     }
     
@@ -33,7 +34,7 @@ const useLongClick = (
       return;
     }
 
-    clickCallback();
+    longClickCallback();
 
     if (preventDefault) {
       e.preventDefault();

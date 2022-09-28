@@ -10,10 +10,13 @@ import TaskProps from './Task.types';
 import './Task.scss';
 import task from './index';
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import {toggleCompleteById} from '../../store/reducers/TasksReducer';
 
 function Task({
   id,
 }:TaskProps) {
+  const dispatch = useAppDispatch();
   const task = useAppSelector(getTaskById(id));
   
   if (!task) {
@@ -28,9 +31,15 @@ function Task({
     mouseUpHandler,
     mouseDownHandler,
     mouseLeaveHandler
-  } = useLongClick(() => {
-    setNavigate(true);
-  });
+  } = useLongClick(
+    () => {
+      setNavigate(true);
+    },
+  );
+
+  const onChangeHandle = () => {
+    dispatch(toggleCompleteById(id));
+  };
 
   const componentClassName = classnames('task', {
     'task--completed': task.completed,
@@ -47,7 +56,13 @@ function Task({
       onTouchEnd={mouseUpHandler}
       onMouseLeave={mouseLeaveHandler}
     >
-      <input id={inputId} type="checkbox" className="task__input" />
+      <input
+        id={inputId}
+        type="checkbox"
+        className="task__input"
+        onChange={onChangeHandle}
+        checked={task.completed}
+      />
       <div className="task__title">{task.title}</div>
 
       <Ripple duration={1000} />

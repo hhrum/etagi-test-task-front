@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface Task {
   id: number
@@ -32,8 +32,17 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
+    toggleCompleteById(state, action: PayloadAction<number>) {
+      const task = state.data.find(task => task.id === action.payload);
+      
+      if (!task) {
+        return;
+      }
+      
+      task.completed = !task.completed;
+    }
   }
 });
 
-// export const {  } = tasksSlice.actions;
+export const { toggleCompleteById } = tasksSlice.actions;
 export default tasksSlice.reducer;
