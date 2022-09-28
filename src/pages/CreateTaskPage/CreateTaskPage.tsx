@@ -9,7 +9,7 @@ import Textarea from '../../components/Textarea';
 
 import Button from '../../components/Button';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {createTask} from '../../store/reducers/TasksReducer';
+import {createTask} from '../../store/reducers/tasks/TasksReducer';
 
 import './CreateTaskPage.scss';
 

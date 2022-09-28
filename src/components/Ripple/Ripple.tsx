@@ -1,10 +1,12 @@
 import React, {MouseEvent, TouchEvent, useState} from 'react';
+import classnames from 'classnames';
 
 import RippleProps, {RippleCircleProps} from './Ripple.types';
 
 import './Ripple.scss';
 
 function Ripple({
+  className,
   duration = 1000
 }: RippleProps) {
   const [circles, setCircles] = useState<RippleCircleProps[]>([]);
@@ -44,10 +46,12 @@ function Ripple({
 
     generateCircle(rippleContainer, e.touches[0].pageX, e.touches[0].pageY);
   };
+  
+  const rippleClassName = classnames('ripple', className);
 
   return (
     <div
-      className="ripple"
+      className={rippleClassName}
       onMouseDown={mouseDownHandle}
       onTouchStart={touchStartHandle}
     >

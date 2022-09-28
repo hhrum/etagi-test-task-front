@@ -4,16 +4,31 @@
   position: relative;
   background: $white-color;
   
-  padding: 24px;
+  padding: 12px 24px;
   border-radius: $border-size;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 24px;
 
   box-shadow: 0 0 10px $shadow-color;
 
   transition: $transition-time;
+
+  &__left-side {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__right-side {
+    z-index: 1;
+  }
+
+  &__ripple {
+    z-index: 0;
+  }
 
   &--completed {
     background-color: $gray-color;
@@ -52,6 +67,28 @@
 
     &:after {
       right: 0;
+    }
+  }
+
+  &__delete-button {
+    position: relative;
+
+    background-color: transparent;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    border: none;
+
+    justify-self: flex-end;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: $danger-color;
+
+      * {
+        color: $danger-color;
+      }
     }
   }
 }

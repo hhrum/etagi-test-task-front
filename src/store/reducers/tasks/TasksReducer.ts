@@ -1,55 +1,30 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-interface Task {
-  id: number
-  title: string
-  completed: boolean
-  startDate: Date
-  finishDate: Date
-  description: string
-}
-
-interface CreateTaskAction {
-  title: string
-  startDate: Date
-  finishDate: Date
-  description: string
-}
-
-interface TasksSlice {
-  data: Task[]
-  lastIndex: number
-  currentPage: number
-}
-
-const initialState = {
-  data: [
-    {
-      id: 1,
-      title: 'Тест',
-      completed: false,
-      startDate: new Date(),
-      finishDate: new Date(),
-      description: 'Описание',
-    }
-  ],
-  lastIndex: 1,
-  currentPage: 2,
-} as TasksSlice;
+import {ICreateTaskAction, ITask} from './TasksReducer.types';
+import initialState from './initialState';
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    createTask(state, action: PayloadAction<CreateTaskAction>) {
+    createTask(state, action: PayloadAction<ICreateTaskAction>) {
       const task = {
         id: state.lastIndex + 1,
         completed: false,
         ...action.payload
-      } as Task;
+      } as ITask;
       
       state.lastIndex += 1;
       state.data.push(task);
+    },
+    
+    deleteTask(state, action: PayloadAction<number>) {
+      const taskIndex = state.data.findIndex(task => task.id === action.payload);
+      
+      if (taskIndex === -1) {
+        return;
+      }
+      
+      state.data.splice(taskIndex, 1);
     },
 
     toggleCompleteById(state, action: PayloadAction<number>) {
@@ -74,6 +49,7 @@ const tasksSlice = createSlice({
 
 export const {
   createTask,
+  deleteTask,
   toggleCompleteById,
   setCurrentPage
 } = tasksSlice.actions;

@@ -7,7 +7,7 @@ import PaginationItemProps from './PaginationItem.types';
 
 import './PaginationItem.scss';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {setCurrentPage} from '../../store/reducers/TasksReducer';
+import {setCurrentPage} from '../../store/reducers/tasks/TasksReducer';
 
 function PaginationItem({
   page,

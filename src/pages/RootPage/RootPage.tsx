@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {MdAdd} from 'react-icons/md';
 
-import Filter, {FilterBy, FilterValue} from '../../components/Filter';
+import Filter from '../../components/Filter';
 import Task from '../../components/Task';
 import Pagination from '../../components/Pagination';
 import PageLayout from '../../components/Layout';
@@ -34,7 +34,7 @@ function RootPage() {
       redirect={redirect}
     >
       <h1>Ваш список задач</h1>
-      <Filter filterValue={FilterValue.None} filterBy={FilterBy.None} />
+      <Filter />
       <div className="root__tasks">
         {tasks.map(task => (
           <Task

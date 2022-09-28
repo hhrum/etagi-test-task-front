@@ -1,11 +1,12 @@
 interface RippleProps {
-  duration?: number,
+  className?: string
+  duration?: number
 }
 
 interface RippleCircleProps {
-  top: number,
-  left: number,
-  width: number,
+  top: number
+  left: number
+  width: number
   height: number
 }
 

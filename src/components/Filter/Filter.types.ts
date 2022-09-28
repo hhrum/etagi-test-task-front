@@ -49,13 +49,7 @@ export const filterBys = {
     text: 'По дате окончания'
   },
 };
-  
-interface FilterProps {
-  filterValue: FilterValue
-  filterBy: FilterBy
-}
 
-export default FilterProps;
 export {
   FilterValue,
   FilterBy

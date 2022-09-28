@@ -1,16 +1,53 @@
-import React from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
-import Ripple from '../Ripple';
-
-import FilterProps, {filterBys, FilterValue, filterValues} from './Filter.types';
-
-import './Filter.scss';
 import Button from '../Button';
 
-function Filter({
-  filterValue = FilterValue.None,
-  filterBy
-}: FilterProps) {
+import useAppSelector, {getFilterBy, getFilterValue} from '../../hooks/useAppSelector';
+
+import {FilterBy, filterBys, FilterValue, filterValues} from './Filter.types';
+
+import './Filter.scss';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import {setFilterBy, setFilterValue} from '../../store/reducers/filter/FilterReducer';
+
+function Filter() {
+
+  const dispatch = useAppDispatch();
+
+  const filterValue = useAppSelector(getFilterValue);
+  const filterBy = useAppSelector(getFilterBy);
+
+  const [innerFilterValue, setInnerFilterValue] = useState<FilterValue>(FilterValue.None);
+  const [innerFilterBy, setInnerFilterBy] = useState<FilterBy>(FilterBy.None);
+  
+  useEffect(() => {
+    setInnerFilterValue(filterValue);
+    setInnerFilterBy(filterBy);
+  }, [filterValue, filterBy, setInnerFilterValue, setInnerFilterBy]);
+
+  const valueChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    
+    if (!Object.values(FilterValue).includes(+e.target.value)) {
+      return;
+    }
+
+    setInnerFilterValue(+e.target.value);
+  };
+  
+  const byChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+
+    if (!Object.values(FilterBy).includes(+e.target.value)) {
+      return;
+    }
+
+    setInnerFilterBy(+e.target.value);
+  };
+  
+  const submitFilterHandler = () => {
+    dispatch(setFilterValue(innerFilterValue));
+    dispatch(setFilterBy(innerFilterBy));
+  };
+  
   return (
     <div className="filter">
       <h2 className="filter__title">Фильтрация</h2>
@@ -18,7 +55,11 @@ function Filter({
       <div className="filter__select-label">
         Способ фильтрации
       </div>
-      <select className="filter__select filter__select-filter-value">
+      <select
+        className="filter__select filter__select-filter-value"
+        value={innerFilterValue}
+        onChange={valueChangeHandler}
+      >
         {Object.values(filterValues).map(item => (
           <option
             key={item.value}
@@ -34,7 +75,11 @@ function Filter({
         Критерий фильтрации
       </div>
 
-      <select className="filter__select filter__select-filter-by">
+      <select
+        className="filter__select filter__select-filter-by"
+        value={innerFilterBy}
+        onChange={byChangeHandler}
+      >
         {Object.values(filterBys).map(item => (
           <option
             key={item.value}
@@ -46,7 +91,11 @@ function Filter({
         ))}
       </select>
 
-      <Button content="Применить" className="filter__button" />
+      <Button
+        content="Применить"
+        className="filter__button"
+        onClick={submitFilterHandler}
+      />
     </div>
   );
 }
