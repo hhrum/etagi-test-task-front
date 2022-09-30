@@ -3,11 +3,12 @@ import classnames from 'classnames';
 
 import Ripple from '../Ripple';
 
+import useAppDispatch from '../../hooks/useAppDispatch';
+import {setCurrentPage} from '../../store/reducers/pagination/PaginationReducer';
+
 import PaginationItemProps from './PaginationItem.types';
 
 import './PaginationItem.scss';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import {setCurrentPage} from '../../store/reducers/tasks/TasksReducer';
 
 function PaginationItem({
   page,

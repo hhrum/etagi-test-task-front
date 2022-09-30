@@ -48,14 +48,6 @@ const tasksSlice = createSlice({
       }
       
       task.completed = !task.completed;
-    },
-    
-    setCurrentPage(state, action: PayloadAction<number>) {
-      if (action.payload < 1 || action.payload > Math.ceil(state.data.length / 15)) {
-        return;
-      }
-      
-      state.currentPage = action.payload;
     }
   }
 });
@@ -65,6 +57,5 @@ export const {
   editTask,
   deleteTask,
   toggleCompleteById,
-  setCurrentPage
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

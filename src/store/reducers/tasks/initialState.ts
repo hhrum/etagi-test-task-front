@@ -12,7 +12,6 @@ const initialState = {
     }
   ],
   lastIndex: 1,
-  currentPage: 1,
 } as ITasksSlice;
 
 export default initialState;

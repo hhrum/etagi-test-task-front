@@ -9,6 +9,7 @@ import {FilterBy, filterBys, FilterValue, filterValues} from './Filter.types';
 import './Filter.scss';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {setFilterBy, setFilterValue} from '../../store/reducers/filter/FilterReducer';
+import {setCurrentPage} from '../../store/reducers/pagination/PaginationReducer';
 
 function Filter() {
 
@@ -44,6 +45,11 @@ function Filter() {
   };
   
   const submitFilterHandler = () => {
+    
+    if (innerFilterBy != filterBy || innerFilterValue != filterValue) {
+      dispatch(setCurrentPage(1));
+    }
+    
     dispatch(setFilterValue(innerFilterValue));
     dispatch(setFilterBy(innerFilterBy));
   };

@@ -73,14 +73,14 @@ function EditTaskPage() {
       }
     }));
 
-    setTimeout(() => setRedirect('/'),500);
+    setTimeout(() => setRedirect('/task/' + customMatch.params.id),500);
   };
 
   return (
     <PageLayout
       header={
         <Header>
-          <NavLink to="/" className="task-page-header__back">
+          <NavLink to={'/task/' + customMatch.params.id} className="task-page-header__back">
             <MdArrowBack />
           </NavLink>
           <h2>Изменение задачи</h2>

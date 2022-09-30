@@ -22,7 +22,6 @@ interface IEditTaskAction {
 interface ITasksSlice {
   data: ITask[]
   lastIndex: number
-  currentPage: number
 }
 
 export default ITasksSlice;

@@ -4,20 +4,27 @@ import {FilterBy, FilterValue} from '../components/Filter';
 
 import {RootState} from '../store/store';
 import sort, {sortBy} from '../utils/sort';
+import {COUNT_TASKS_OF_PAGE} from '../config/app';
+import {ITask} from '../store/reducers/tasks';
+import pagination from '../utils/pagination';
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const getTasks = (state: RootState) => {
-  if (FilterBy.None === state.filter.by || FilterValue.None === state.filter.value) {
-    return sort(state.tasks.data);
-  }
+  let tasks: ITask[]; 
   
-  return sortBy(state.tasks.data, state.filter.by, state.filter.value);
+  if (FilterBy.None === state.filter.by || FilterValue.None === state.filter.value) {
+    tasks = sort(state.tasks.data);
+  } else {
+    tasks = sortBy(state.tasks.data, state.filter.by, state.filter.value);
+  }
+
+  return pagination(state, tasks);
 };
 const getTaskById = (id: number) => (state: RootState) => state.tasks.data.find(task => task.id === id);
 
-const getCurrentPage = (state: RootState) => state.tasks.currentPage;
-const getTotalPages = (state: RootState) => Math.ceil(state.tasks.data.length / 15);
+const getCurrentPage = (state: RootState) => state.pagination.currentPage;
+const getTotalPages = (state: RootState) => Math.ceil(state.tasks.data.length / COUNT_TASKS_OF_PAGE);
 
 const getFilterValue = (state: RootState) => state.filter.value;
 const getFilterBy = (state: RootState) => state.filter.by;
