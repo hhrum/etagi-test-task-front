@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Navigate, NavLink, useMatch} from 'react-router-dom';
 import {
   MdArrowBack
@@ -11,8 +11,12 @@ import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 
 import './TaskPage.scss';
 import date from '../../utils/date';
+import Button from '../../components/Button';
 
 function TaskPage() {
+
+  const [redirect, setRedirect] = useState<string|null>(null);
+
   const customMatch = useMatch('/task/:id');
   
   if (!customMatch?.params.id) {
@@ -36,6 +40,7 @@ function TaskPage() {
         </Header>
       }
       contentClassName="task-page"
+      redirect={redirect}
     >
       <div className="task-page__title">
         <h1>
@@ -63,6 +68,14 @@ function TaskPage() {
           <div className="field__content">{task.description}</div>
         </div>
       </div>
+
+      <Button
+        content="Изменить"
+        onClick={() => setTimeout(
+          () => setRedirect('/task/' + customMatch?.params.id + '/edit'),
+          500
+        )}
+      />
     </PageLayout>
   );
 }

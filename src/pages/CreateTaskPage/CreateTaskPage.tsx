@@ -4,42 +4,43 @@ import {MdArrowBack} from 'react-icons/md';
 import PageLayout from '../../components/Layout';
 import Header from '../../components/Header';
 import Ripple from '../../components/Ripple';
-import Input from '../../components/Input';
-import Textarea from '../../components/Textarea';
 
 import Button from '../../components/Button';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {createTask} from '../../store/reducers/tasks/TasksReducer';
 
 import './CreateTaskPage.scss';
+import TaskForm, {ITaskFormData} from '../../components/TaskForm';
 
 function CreateTaskPage() {
   
   const dispatch = useAppDispatch();
 
   const [redirect, setRedirect] = useState<string|null>(null);
-  const [title, setTitle] = useState<string>('');
-  const [startDate, setStartDate] = useState<string>('');
-  const [finishDate, setFinishDate] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+
+  const [taskFormData, setTaskFormData] = useState<ITaskFormData>({
+    title: '',
+    startDate: '',
+    finishDate: '',
+    description: '',
+  });
   
   const submitHandler = () => {
-    
     if (
-      !title
-      || !startDate
-      || !finishDate
-      || !description
+      !taskFormData.title
+      || !taskFormData.startDate
+      || !taskFormData.finishDate
+      || !taskFormData.description
     ) {
       alert('Вы не заполнели все поля!');
       return;
     }
 
     dispatch(createTask({
-      title,
-      startDate: new Date(startDate),
-      finishDate: new Date(finishDate),
-      description
+      title: taskFormData.title,
+      startDate: new Date(taskFormData.startDate),
+      finishDate: new Date(taskFormData.finishDate),
+      description: taskFormData.description
     }));
 
     setTimeout(() => setRedirect('/'),500);
@@ -65,48 +66,8 @@ function CreateTaskPage() {
       redirect={redirect}
     >
 
-      <div className="create-task-page__form">
-        <form className="create-task-form">
-          <div className="create-task-form__field">
-            <Input
-              label="Заголовок"
-              value={title}
-              onChange={setTitle}
-            />
-          </div>
-          <div className="create-task-form__field">
-            <Input
-              label="Дата начала"
-              type="date"
-
-              max={finishDate}
-
-              value={startDate}
-              onChange={setStartDate}
-            />
-          </div>
-          <div className="create-task-form__field">
-            <Input
-              label="Дата окончания"
-              type="date"
-
-              min={startDate}
-
-              value={finishDate}
-              onChange={setFinishDate}
-            />
-          </div>
-          <div className="create-task-form__field">
-            <Textarea
-              label="Описание"
-              value={description}
-              onChange={setDescription}
-            />
-          </div>
-          
-          <Button content="Создать" onClick={submitHandler} />
-        </form>
-      </div>
+      <TaskForm taskFormData={taskFormData} onChange={setTaskFormData} />
+      <Button content="Создать" onClick={submitHandler} />
 
     </PageLayout>
   );

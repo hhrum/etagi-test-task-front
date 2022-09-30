@@ -52,6 +52,10 @@ function Task({
     if (deleted) {
       return;
     }
+    
+    if (!confirm('Вы действительно хотите удалить задачу: "' + task.title + '"?')) {
+      return;
+    }
 
     setTimeout(() => {
       setDeleted(true);
