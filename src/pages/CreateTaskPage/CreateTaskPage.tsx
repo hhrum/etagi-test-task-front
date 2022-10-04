@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {MdArrowBack} from 'react-icons/md';
 
 import PageLayout from '../../components/Layout';
 import Header from '../../components/Header';
-import Ripple from '../../components/Ripple';
-
+import TaskForm, {ITaskFormData} from '../../components/TaskForm';
 import Button from '../../components/Button';
+import HeaderBackLink from '../../components/Links/HeaderBackLink';
+
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {createTask} from '../../store/reducers/tasks/TasksReducer';
 
 import './CreateTaskPage.scss';
-import TaskForm, {ITaskFormData} from '../../components/TaskForm';
 
 function CreateTaskPage() {
   
@@ -52,14 +51,7 @@ function CreateTaskPage() {
       contentClassName="create-task-page__content"
       header={
         <Header className="create-task-page-header">
-          <div
-            className="create-task-page-header__back"
-            onClick={() => setTimeout(() => setRedirect('/'),500)}
-          >
-            <MdArrowBack />
-            
-            <Ripple />
-          </div>
+          <HeaderBackLink to="/" />
           <h2>Создание задачи</h2>
         </Header>
       }

@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {MdArrowBack} from 'react-icons/md';
-import {Navigate, NavLink, useMatch} from 'react-router-dom';
+import {Navigate, useMatch} from 'react-router-dom';
 
 import PageLayout from '../../components/Layout';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import TaskForm, {ITaskFormData} from '../../components/TaskForm';
+import HeaderBackLink from '../../components/Links/HeaderBackLink';
 
+import {editTask} from '../../store/reducers/tasks/TasksReducer';
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import date from '../../utils/date';
 
 import './EditTaskPage.scss';
-import date from '../../utils/date';
-import {createTask, editTask} from '../../store/reducers/tasks/TasksReducer';
-import useAppDispatch from '../../hooks/useAppDispatch';
 
 function EditTaskPage() {
   const customMatch = useMatch('/task/:id/edit');
@@ -80,9 +80,7 @@ function EditTaskPage() {
     <PageLayout
       header={
         <Header>
-          <NavLink to={'/task/' + customMatch.params.id} className="task-page-header__back">
-            <MdArrowBack />
-          </NavLink>
+          <HeaderBackLink to={'/task/' + customMatch.params.id} />
           <h2>Изменение задачи</h2>
         </Header>
       }

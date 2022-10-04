@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
-import {Navigate, NavLink, useMatch} from 'react-router-dom';
-import {
-  MdArrowBack
-} from 'react-icons/md';
+import {Navigate, useMatch} from 'react-router-dom';
 
 import PageLayout from '../../components/Layout';
 import Header from '../../components/Header';
+import Button from '../../components/Button';
 
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
+import date from '../../utils/date';
 
 import './TaskPage.scss';
-import date from '../../utils/date';
-import Button from '../../components/Button';
+import HeaderBackLink from '../../components/Links/HeaderBackLink';
 
 function TaskPage() {
 
@@ -33,9 +31,7 @@ function TaskPage() {
     <PageLayout 
       header={
         <Header className="task-page-header">
-          <NavLink to="/" className="task-page-header__back">
-            <MdArrowBack />
-          </NavLink>
+          <HeaderBackLink to="/" />
           <h2>{task.title}</h2>
         </Header>
       }

@@ -22,27 +22,6 @@
   }
 }
 
-.task-page-header {
-
-  &__back {
-    position: relative;
-
-    width: $header-height;
-    height: $header-height;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 28px;
-      height: 28px;
-
-      color: $font-color;
-    }
-  }
-}
-
 .field {
   display: flex;
   flex-direction: column;
