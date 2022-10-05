@@ -75,6 +75,7 @@ function Task({
       onMouseUp={mouseUpHandler}
       onTouchEnd={mouseUpHandler}
       onMouseLeave={mouseLeaveHandler}
+      onTouchMove={mouseLeaveHandler}
     >
       <div className="task__left-side">
         <input
