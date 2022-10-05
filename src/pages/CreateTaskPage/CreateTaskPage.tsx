@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import HeaderBackLink from '../../components/Links/HeaderBackLink';
 
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {createTask} from '../../store/reducers/tasks/TasksReducer';
+import {createTaskAction} from '../../store/reducers/tasks/TasksReducer';
 
 import './CreateTaskPage.scss';
 
@@ -35,7 +35,7 @@ function CreateTaskPage() {
       return;
     }
 
-    dispatch(createTask({
+    dispatch(createTaskAction({
       title: taskFormData.title,
       startDate: new Date(taskFormData.startDate),
       finishDate: new Date(taskFormData.finishDate),

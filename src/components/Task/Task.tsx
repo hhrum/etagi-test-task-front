@@ -8,7 +8,7 @@ import useLongClick from '../../hooks/useLongClick';
 
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {deleteTask, toggleCompleteById} from '../../store/reducers/tasks/TasksReducer';
+import {deleteTaskAction, toggleCompleteById} from '../../store/reducers/tasks/TasksReducer';
 
 import TaskProps from './Task.types';
 
@@ -57,10 +57,8 @@ function Task({
       return;
     }
 
-    setTimeout(() => {
-      setDeleted(true);
-      dispatch(deleteTask(id));
-    }, 500);
+    setDeleted(true);
+    dispatch(deleteTaskAction(id));
   };
 
   const componentClassName = classnames('task', {

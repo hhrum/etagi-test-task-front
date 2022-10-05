@@ -14,19 +14,12 @@ interface ICreateTaskAction {
   description: string
 }
 
-interface IEditTaskAction {
-  id: number
-  task: ICreateTaskAction
-}
-
 interface ITasksSlice {
   data: ITask[]
-  lastIndex: number
 }
 
 export default ITasksSlice;
 export type {
   ITask,
   ICreateTaskAction,
-  IEditTaskAction
 };

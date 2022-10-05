@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import TaskForm, {ITaskFormData} from '../../components/TaskForm';
 import HeaderBackLink from '../../components/Links/HeaderBackLink';
 
-import {editTask} from '../../store/reducers/tasks/TasksReducer';
+import {editTaskAction} from '../../store/reducers/tasks/TasksReducer';
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import date from '../../utils/date';
@@ -62,15 +62,12 @@ function EditTaskPage() {
       return;
     }
 
-    dispatch(editTask({
-      id: +customMatch.params.id,
-      task :{
-
-        title: taskFormData.title,
-        startDate: new Date(taskFormData.startDate),
-        finishDate: new Date(taskFormData.finishDate),
-        description: taskFormData.description
-      }
+    dispatch(editTaskAction({
+      ...task,
+      title: taskFormData.title,
+      startDate: new Date(taskFormData.startDate),
+      finishDate: new Date(taskFormData.finishDate),
+      description: taskFormData.description
     }));
 
     setTimeout(() => setRedirect('/task/' + customMatch.params.id),500);

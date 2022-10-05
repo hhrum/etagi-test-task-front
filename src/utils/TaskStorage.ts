@@ -25,6 +25,7 @@ const addTask = (task: ITask) => {
   tasks.push(task);
 
   setTasks(tasks);
+  return getTasks();
 };
 
 const editTask = (task: ITask) => {
@@ -38,6 +39,7 @@ const editTask = (task: ITask) => {
   tasks.splice(taskIndex, 1, task);
   
   setTasks(tasks);
+  return getTasks();
 };
 
 const deleteTask = (taskId: number) => {
@@ -45,12 +47,14 @@ const deleteTask = (taskId: number) => {
   const taskIndex = tasks.findIndex(item => taskId === item.id);
 
   if (taskIndex === -1) {
+    console.log(taskIndex);
     return;
   }
 
   tasks.splice(taskIndex, 1);
 
   setTasks(tasks);
+  return getTasks();
 };
 
 const getLastIndex = () => {

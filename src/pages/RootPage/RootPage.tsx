@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {MdAdd} from 'react-icons/md';
 
 import Filter from '../../components/Filter';
@@ -8,12 +8,22 @@ import PageLayout from '../../components/Layout';
 import useAppSelector, {getTasks} from '../../hooks/useAppSelector';
 import Ripple from '../../components/Ripple';
 
+import useAppDispatch from '../../hooks/useAppDispatch';
+import {initTasksAction} from '../../store/reducers/tasks/TasksReducer';
+
 import './RootPage.scss';
 
 function RootPage() {
   const [redirect, setRedirect] = useState<string|null>(null);
 
+  const dispatch = useAppDispatch();
   const tasks = useAppSelector(getTasks);
+
+  console.log('rootpage', tasks);
+  
+  useEffect(() => {
+    dispatch(initTasksAction());
+  }, []);
   
   return (
     <PageLayout 

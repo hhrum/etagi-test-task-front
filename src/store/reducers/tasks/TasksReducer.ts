@@ -1,43 +1,13 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {ICreateTaskAction, IEditTaskAction, ITask} from './TasksReducer.types';
+import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {ICreateTaskAction, ITask} from './TasksReducer.types';
 import initialState from './initialState';
 
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    createTask(state, action: PayloadAction<ICreateTaskAction>) {
-      const task = {
-        id: state.lastIndex + 1,
-        completed: false,
-        ...action.payload
-      } as ITask;
-      
-      state.lastIndex += 1;
-      state.data.push(task);
-    },
-
-    editTask(state, action: PayloadAction<IEditTaskAction>) {
-      const task = state.data.find(task => task.id === action.payload.id);
-
-      if (!task) {
-        return;
-      }
-
-      task.title = action.payload.task.title;
-      task.startDate = action.payload.task.startDate;
-      task.finishDate = action.payload.task.finishDate;
-      task.description = action.payload.task.description;
-    },
-    
-    deleteTask(state, action: PayloadAction<number>) {
-      const taskIndex = state.data.findIndex(task => task.id === action.payload);
-      
-      if (taskIndex === -1) {
-        return;
-      }
-      
-      state.data.splice(taskIndex, 1);
+    setTasks(state, action: PayloadAction<ITask[]>) {
+      state.data = action.payload;
     },
 
     toggleCompleteById(state, action: PayloadAction<number>) {
@@ -52,10 +22,21 @@ const tasksSlice = createSlice({
   }
 });
 
+const initTasksAction = createAction('tasks/initTasks');
+const createTaskAction = createAction<ICreateTaskAction>('tasks/createTask');
+const editTaskAction = createAction<ITask>('tasks/editTask');
+const deleteTaskAction = createAction<number>('tasks/deleteTask');
+
 export const {
-  createTask,
-  editTask,
-  deleteTask,
+  setTasks,
   toggleCompleteById,
 } = tasksSlice.actions;
+
+export {
+  initTasksAction,
+  createTaskAction,
+  editTaskAction,
+  deleteTaskAction,
+};
+
 export default tasksSlice.reducer;
