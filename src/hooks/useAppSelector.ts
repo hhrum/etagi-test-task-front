@@ -10,6 +10,7 @@ import pagination from '../utils/pagination';
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
+// tasks
 const getTasks = (state: RootState) => {
   let tasks: ITask[]; 
   
@@ -23,11 +24,16 @@ const getTasks = (state: RootState) => {
 };
 const getTaskById = (id: number) => (state: RootState) => state.tasks.data.find(task => task.id === id);
 
+// pagination
 const getCurrentPage = (state: RootState) => state.pagination.currentPage;
 const getTotalPages = (state: RootState) => Math.ceil(state.tasks.data.length / COUNT_TASKS_OF_PAGE);
 
+// filter
 const getFilterValue = (state: RootState) => state.filter.value;
 const getFilterBy = (state: RootState) => state.filter.by;
+
+// loader
+const getLoader = (state:RootState) => state.loader.loading;
 
 export default useAppSelector;
 export {
@@ -39,4 +45,6 @@ export {
 
   getFilterValue,
   getFilterBy,
+
+  getLoader,
 };

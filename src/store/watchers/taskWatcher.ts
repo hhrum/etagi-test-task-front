@@ -1,6 +1,6 @@
-import {call, delay, put, takeEvery} from 'redux-saga/effects';
+import {delay, put, takeEvery} from 'redux-saga/effects';
+import {PayloadAction} from '@reduxjs/toolkit';
 
-import TaskStorage from '../../utils/TaskStorage';
 import {ICreateTaskAction, ITask} from '../reducers/tasks/TasksReducer.types';
 import {
   createTaskAction,
@@ -9,17 +9,26 @@ import {
   initTasksAction,
   setTasks
 } from '../reducers/tasks/TasksReducer';
-import {PayloadAction} from '@reduxjs/toolkit';
+import {setCurrentPage} from '../reducers/pagination/PaginationReducer';
+import {setLoader} from '../reducers/loader/LoaderReducer';
+
+import TaskStorage from '../../utils/TaskStorage';
 
 function* initTasksWorker() {
+  yield put(setLoader(true));
+
   yield delay(1000);
 
   const tasks: ITask[] = yield TaskStorage.getTasks();
 
   yield put(setTasks(tasks));
+
+  yield put(setLoader(false));
 }
 
 function* createTaskWorker(action: PayloadAction<ICreateTaskAction>) {
+  yield put(setLoader(true));
+
   yield delay(1000);
 
   const task: ITask = {
@@ -32,17 +41,26 @@ function* createTaskWorker(action: PayloadAction<ICreateTaskAction>) {
   yield TaskStorage.incrementLastIndex();
 
   yield put(setTasks(tasks));
+  yield put(setCurrentPage(1));
+
+  yield put(setLoader(false));
 }
 
 function* editTaskWorker(action: PayloadAction<ITask>) {
+  yield put(setLoader(true));
+
   yield delay(1000);
   
   const tasks: ITask[] = yield TaskStorage.editTask(action.payload);
 
   yield put(setTasks(tasks));
+
+  yield put(setLoader(false));
 }
 
 function* deleteTaskWorker(action: PayloadAction<number>) {
+  yield put(setLoader(true));
+
   yield delay(1000);
   
   const tasks: ITask[] = yield TaskStorage.deleteTask(action.payload);
@@ -50,6 +68,8 @@ function* deleteTaskWorker(action: PayloadAction<number>) {
   console.log(tasks);
 
   yield put(setTasks(tasks));
+
+  yield put(setLoader(false));
 }
 
 function* taskWatcher() {

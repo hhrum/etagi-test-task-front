@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import classnames from 'classnames';
+import {Navigate} from 'react-router-dom';
+
+import Loader from '../Loader';
 
 import PageLayoutProps from './PageLayout.types';
 
 import './PageLayout.scss';
-import {Navigate} from 'react-router-dom';
 
 function PageLayout({
   className,
@@ -18,6 +20,10 @@ function PageLayout({
 
   redirect,
 }: PageLayoutProps) {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const layoutClass = classnames('page-layout', className);
   const headerClass = classnames('page-layout__header', headerClassName);
@@ -41,6 +47,10 @@ function PageLayout({
       {redirect && 
         <Navigate to={redirect} />
       }
+
+      <div className="page-layout__loader">
+        <Loader />
+      </div>
     </div>
   );
 }

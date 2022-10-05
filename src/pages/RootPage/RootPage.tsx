@@ -5,7 +5,7 @@ import Filter from '../../components/Filter';
 import Task from '../../components/Task';
 import Pagination from '../../components/Pagination';
 import PageLayout from '../../components/Layout';
-import useAppSelector, {getTasks} from '../../hooks/useAppSelector';
+import useAppSelector, {getCurrentPage, getTasks, getTotalPages} from '../../hooks/useAppSelector';
 import Ripple from '../../components/Ripple';
 
 import useAppDispatch from '../../hooks/useAppDispatch';
@@ -18,12 +18,16 @@ function RootPage() {
 
   const dispatch = useAppDispatch();
   const tasks = useAppSelector(getTasks);
+  const currentPage = useAppSelector(getCurrentPage);
+  const totalPages = useAppSelector(getTotalPages);
 
-  console.log('rootpage', tasks);
-  
   useEffect(() => {
     dispatch(initTasksAction());
   }, []);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
   
   return (
     <PageLayout 
@@ -45,14 +49,27 @@ function RootPage() {
     >
       <h1>Ваш список задач</h1>
       <Filter />
-      <div className="root__tasks">
-        {tasks.map(task => (
-          <Task
-            key={task.id}
-            id={task.id}
-          />
-        ))}
-      </div>
+
+      {
+        totalPages
+          ? (
+            <div className="root__tasks">
+              {tasks.map(task => (
+                <Task
+                  key={task.id}
+                  id={task.id}
+                />
+              ))}
+            </div>
+          )
+          : (
+            <div className="root__no-tasks">
+              <h3>Пока что никаких задач нет!</h3>
+              <br/>
+              Вы можете добавить их, нажав на кнопочку в <i>правом нижнем углу экрана</i>
+            </div>
+          )
+      }
       <Pagination />
     </PageLayout>
   );

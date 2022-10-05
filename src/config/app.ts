@@ -1,2 +1,2 @@
 
-export const COUNT_TASKS_OF_PAGE = 2;
+export const COUNT_TASKS_OF_PAGE = 5;

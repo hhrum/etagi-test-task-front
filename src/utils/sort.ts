@@ -2,7 +2,7 @@ import {ITask} from '../store/reducers/tasks';
 import {FilterBy, FilterValue} from '../components/Filter';
 
 const sort = (tasks: ITask[]) => [...tasks]
-  .sort((task1, task2) => task1.id > task2.id ? 1 : -1);
+  .sort((task1, task2) => task1.id < task2.id ? 1 : -1);
 
 const sortBy = (tasks: ITask[], by: FilterBy, value: FilterValue) => {
   if (FilterBy.None === by || FilterValue.None === value) {

@@ -10,6 +10,15 @@ import router from './router/router';
 
 import './index.scss';
 
+const calculateVh = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+calculateVh();
+window.addEventListener('resize', calculateVh);
+window.removeEventListener('resize', calculateVh);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
