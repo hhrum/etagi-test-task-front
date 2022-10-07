@@ -7,6 +7,7 @@ import Pagination from '../../components/Pagination';
 import PageLayout from '../../components/Layout';
 import useAppSelector, {getCurrentPage, getTasks, getTotalPages} from '../../hooks/useAppSelector';
 import Ripple from '../../components/Ripple';
+import OpenTaskHint from '../../components/Hint/OpenTaskHint';
 
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {initTasksAction} from '../../store/reducers/tasks/TasksReducer';
@@ -50,6 +51,8 @@ function RootPage() {
       <h1>Ваш список задач</h1>
       <Filter />
 
+      <OpenTaskHint />
+      
       {
         totalPages
           ? (

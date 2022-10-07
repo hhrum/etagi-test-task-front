@@ -35,6 +35,9 @@ const getFilterBy = (state: RootState) => state.filter.by;
 // loader
 const getLoader = (state:RootState) => state.loader.loading;
 
+// hints
+const getHint = (hintName: string) => (state:RootState) => state.hints.data.find(hint => hint.name == hintName);
+
 export default useAppSelector;
 export {
   getTasks,
@@ -47,4 +50,6 @@ export {
   getFilterBy,
 
   getLoader,
+
+  getHint,
 };

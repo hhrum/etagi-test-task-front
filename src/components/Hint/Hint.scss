@@ -1,0 +1,25 @@
+@import "src/assets/style/variables.module";
+
+.hint {
+  max-height: 0;
+  margin: 8px 0;
+
+  transition: $transition-time;
+
+  &--show {
+    margin: 0;
+  }
+
+  &__text {
+    color: $font-secondary-color;
+    font-size: 16px;
+    font-style: italic;
+
+    opacity: 0;
+    transition: $transition-time;
+  }
+
+  &--show &__text {
+    opacity: 1;
+  }
+}

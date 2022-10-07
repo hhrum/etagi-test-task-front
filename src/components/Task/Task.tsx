@@ -13,7 +13,9 @@ import {deleteTaskAction, toggleCompleteById} from '../../store/reducers/tasks/T
 import TaskProps from './Task.types';
 
 import './Task.scss';
+import hints, {HINT_OPEN_TASK} from '../../config/hints';
 
+const hint = hints[HINT_OPEN_TASK];
 
 function Task({
   id,
@@ -38,6 +40,7 @@ function Task({
     mouseLeaveHandler
   } = useLongClick(
     () => {
+      hint.event.dispatch();
       setNavigate(true);
     },
   );

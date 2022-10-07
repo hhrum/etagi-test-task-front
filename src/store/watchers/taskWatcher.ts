@@ -65,8 +65,6 @@ function* deleteTaskWorker(action: PayloadAction<number>) {
   
   const tasks: ITask[] = yield TaskStorage.deleteTask(action.payload);
 
-  console.log(tasks);
-
   yield put(setTasks(tasks));
 
   yield put(setLoader(false));

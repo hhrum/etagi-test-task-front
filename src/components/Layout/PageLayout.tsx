@@ -7,6 +7,8 @@ import Loader from '../Loader';
 import PageLayoutProps from './PageLayout.types';
 
 import './PageLayout.scss';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import {initHintsAction} from '../../store/reducers/hints/HintsReducer';
 
 function PageLayout({
   className,
@@ -20,9 +22,12 @@ function PageLayout({
 
   redirect,
 }: PageLayoutProps) {
+
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(initHintsAction);
   }, []);
   
   const layoutClass = classnames('page-layout', className);
