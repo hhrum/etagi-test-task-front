@@ -47,11 +47,24 @@ const deleteTask = (taskId: number) => {
   const taskIndex = tasks.findIndex(item => taskId === item.id);
 
   if (taskIndex === -1) {
-    console.log(taskIndex);
     return;
   }
 
   tasks.splice(taskIndex, 1);
+
+  setTasks(tasks);
+  return getTasks();
+};
+
+const toggleComplete = (taskId: number) => {
+  const tasks = getTasks();
+  const task = tasks.find(item => taskId === item.id);
+
+  if (!task) {
+    return;
+  }
+
+  task.completed = !task.completed;
 
   setTasks(tasks);
   return getTasks();
@@ -83,6 +96,8 @@ export default {
   addTask,
   editTask,
   deleteTask,
+  toggleComplete,
+
   getLastIndex,
   incrementLastIndex
 };

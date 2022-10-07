@@ -7,7 +7,7 @@ import {
   deleteTaskAction,
   editTaskAction,
   initTasksAction,
-  setTasks
+  setTasks, toggleCompleteTaskAction
 } from '../reducers/tasks/TasksReducer';
 import {setCurrentPage} from '../reducers/pagination/PaginationReducer';
 import {setLoader} from '../reducers/loader/LoaderReducer';
@@ -70,11 +70,17 @@ function* deleteTaskWorker(action: PayloadAction<number>) {
   yield put(setLoader(false));
 }
 
+function* toggleCompleteTaskWorker(action: PayloadAction<number>) {
+  const tasks: ITask[] = yield TaskStorage.toggleComplete(action.payload);
+  yield put(setTasks(tasks));
+}
+
 function* taskWatcher() {
   yield takeEvery(initTasksAction, initTasksWorker);
   yield takeEvery(createTaskAction, createTaskWorker);
   yield takeEvery(editTaskAction, editTaskWorker);
   yield takeEvery(deleteTaskAction, deleteTaskWorker);
+  yield takeEvery(toggleCompleteTaskAction, toggleCompleteTaskWorker);
 }
 
 export default taskWatcher;

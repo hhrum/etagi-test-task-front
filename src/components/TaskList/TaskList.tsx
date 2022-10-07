@@ -1,18 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import TaskListProps from './TaskList.types';
+import Task from '../Task';
+
+import useAppSelector, {getTasks} from '../../hooks/useAppSelector';
 
 import './TaskList.scss';
 
-function TaskList({}: TaskListProps) {
-
-  // const [tasks, setTasks] = useState()
+function TaskList() {
+  
+  const tasks = useAppSelector(getTasks);
 
   return (
     <div className="task-list">
-      <div className="task-list__item">
-
-      </div>
+      {tasks.map(task => (
+        <div className="task-list__item"
+          key={task.id}
+        >
+          <Task
+            id={task.id}
+          />
+        </div>
+      ))}
     </div>
   );
 }

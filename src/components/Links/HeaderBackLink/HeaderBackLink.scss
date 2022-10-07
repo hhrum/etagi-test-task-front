@@ -3,7 +3,8 @@
 .header-back-link {
   position: relative;
 
-  width: $header-height;
+  min-width: $header-height;
+  max-width: $header-height;
   height: $header-height;
   border-radius: $header-height;
 

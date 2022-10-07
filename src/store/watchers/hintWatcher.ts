@@ -13,7 +13,6 @@ function* initHintsWorker() {
 
 function* pushHintWorker(action: PayloadAction<IHint>) {
   const hints: IHint[] = yield HintStorage.pushHint(action.payload);
-  console.log(hints);
   yield put(setHints(hints));
 }
 

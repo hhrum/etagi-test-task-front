@@ -70,7 +70,6 @@ function Filter() {
           <option
             key={item.value}
             value={item.value}
-            selected={filterValue === item.value}
           >
             {item.text}
           </option>
@@ -90,7 +89,6 @@ function Filter() {
           <option
             key={item.value}
             value={item.value}
-            selected={filterBy === item.value}
           >
             {item.text}
           </option>

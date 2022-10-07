@@ -8,7 +8,7 @@ import useLongClick from '../../hooks/useLongClick';
 
 import useAppSelector, {getTaskById} from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import {deleteTaskAction, toggleCompleteById} from '../../store/reducers/tasks/TasksReducer';
+import {deleteTaskAction, toggleCompleteTaskAction} from '../../store/reducers/tasks/TasksReducer';
 
 import TaskProps from './Task.types';
 
@@ -46,7 +46,7 @@ function Task({
   );
 
   const changeHandler = () => {
-    dispatch(toggleCompleteById(id));
+    dispatch(toggleCompleteTaskAction(id));
   };
   
   const deleteHandler = (e: MouseEvent<HTMLButtonElement>) => {

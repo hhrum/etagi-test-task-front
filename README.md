@@ -1,46 +1,146 @@
-# Getting Started with Create React App
+# Тестовое задание для компании "Этажи"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Используемый стек технологий
 
-## Available Scripts
+### `React` в связке с `Typescript`
 
-In the project directory, you can run:
+### `Redux` в связке с `redux-toolkit` и `redux-saga`
 
-### `npm start`
+### `react-router-dom`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Использовался в качестве маршрутизатора, как замена `React Navigation`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `ts-localstorage`
 
-### `npm test`
+Использовался для типизации localstorage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `moment`
 
-### `npm run build`
+Использовался для работы с датами
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `classnames`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Удобная библиотека для манипуляции с классами
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `react-icons`
 
-### `npm run eject`
+Иконки (использовал только иконки Material Design)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `node-sass`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Все стили были написаны на Scss. \
+P.s. Использовал только для переменных и вложенности 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `Eslint`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+На проекте также использовался, сначала хотел использовать стандарты [Airbnb](https://airbnb.io/javascript/), 
+но решил, что нет смысла нагружаться излишними правилами, чтобы сильно не замедлять разработку этим.
 
-## Learn More
+## Структура проекта
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `/assets`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Общие стили(переменные, миксины и тд, которые потенциально будут использоваться в нескольких компонентах), 
+также изображения, но в контексте задачи не потребовалось
+
+### `/components`
+
+Основная директория с компонентами.
+В общем случае структура папок внутри следующая:
+
+```
+/$COMPONENT_NAME
+/$COMPONENT_NAME/index.ts - для реэкспорта
+/$COMPONENT_NAME/$COMPONENT_NAME.tsx - файл с компонентом
+/$COMPONENT_NAME/$COMPONENT_NAME.types.ts - файл с интерфейсами и прочим вспомогательным
+/$COMPONENT_NAME/$COMPONENT_NAME.scss - файл со стилями
+```
+
+### `/config`
+
+По большей части различные конфиги, но в контексте задачи только два файла
+
+```
+/app.ts - содержит настройку кол-ва элементов на одной странице
+/hints.ts - содержит информацию о подсказках
+```
+
+P.s. файл /hints.ts содержит часть логики, 
+которая в нём не должна присутствовать(забыл раскидать по нужным директориям)
+
+### `/hooks`
+
+Хуки
+
+### `/pages`
+
+Страницы
+
+### `/router`
+
+Роутер и его настройка
+
+### `/store`
+
+Стор всего приложения. В данной директории находится реализация redux, redux-saga
+
+### `/utils`
+
+Вспомогательные функции, по типу, для работы с датами, localstorage и прочее
+
+## Трудности, с которыми столкнулся во время разработки
+
+### Случайно установил не `redux-saga`, а `react-saga`
+
+Было больно
+
+## Из интересного
+
+### Впервые реализовывал `Hint`
+
+*В рамках проекта, `Hint` это элемент, который отвечает за подсказки по приложению.* 
+
+Хотелось реализовать максимально просто, но чтобы имел следующий функционал:
+
+* Возможность показывать/скрывать по определенным условиям \
+В целом получилось, но для отдельной подсказки, нужна отдельная реализация в качестве компонента,
+который отвечает за эту логику. Пока что для себя не понял, удобно это будет или нет.
+* Реализация через redux + localstorage \
+Получилось
+* Расширяемость \
+На самом деле расширяемость слабенькая, на мой взгляд
+
+### Пытался исправить беды с шапкой браузера на мобилках
+
+*Распространено в браузере Chrome. Элемент браузера, в котором находится поисковая строка, 
+скрывается при определенных условиях. При это на размер окна он не влияет, 
+т.е. 100vh в случае, если этот элемент виден, больше, чем видимая область*
+
+Попытался воспользоваться [этим решением](https://css-tricks.com/the-trick-to-viewport-units-on-mobile/).
+Вроде стало получше.
+
+### useLongClick
+
+### Компонент Ripple
+
+## Не получилось
+
+### Так и не реализовал хук useForm
+
+Хотел сделать что-то гибкое. По типу, прокидываешь условный интерфейс формы и какие-то правила валидации,
+а он возвращает formState(поля), setFormState(функция для изменения полей) и validate(функция для валидации)
+
+### Некоторые из пунктов тз не правильно понял
+
+> Задачи отображаются на главной странице в порядке их добавления в виде
+списка с пагинацией. По достижению конца страницы добавляются новые
+данные, а по достижению конца списка задач отображается надпись “Конец
+списка”
+
+ Возможно, проблема в формулировке, но так и не понял, как именно должна себя вести страница с задачами
+ 
+> Задачи на главной странице можно фильтровать по всем параметрам, кроме
+описания. После изменения параметров фильтрации пагинация сбрасывается,
+т.е. отображается только первая страница
+
+Только под конец понял, что по сути реализовал только сортировку по всем параметрам, кроме описания 

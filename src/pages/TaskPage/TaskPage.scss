@@ -5,10 +5,16 @@
   flex-direction: column;
 
   &__title {
-    margin-bottom: 18px;
+    margin-bottom: 4px;
+
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 600;
   }
 
   &__completed {
+    margin-bottom: 18px;
+
     color: $font-secondary-color;
     font-size: 14px;
 
@@ -19,6 +25,18 @@
 
   &__field {
     margin-bottom: 12px;
+  }
+}
+
+.task-page-header {
+
+  padding-right: 24px;
+
+  &__title {
+    max-width: calc(100% - #{$header-height} - 24px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

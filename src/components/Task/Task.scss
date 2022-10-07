@@ -3,6 +3,7 @@
 .task {
   position: relative;
   background: $white-color;
+  overflow: hidden;
   
   padding: 12px 24px;
   border-radius: $border-size;
@@ -17,6 +18,8 @@
   transition: $transition-time;
 
   &__left-side {
+    max-width: calc(100% - 48px - 24px);
+
     display: flex;
     align-items: center;
     gap: 24px;
@@ -42,6 +45,12 @@
 
   &__title {
     position: relative;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     font-size: 18px;
     font-weight: bold;

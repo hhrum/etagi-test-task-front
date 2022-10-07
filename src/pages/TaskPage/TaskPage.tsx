@@ -32,20 +32,20 @@ function TaskPage() {
       header={
         <Header className="task-page-header">
           <HeaderBackLink to="/" />
-          <h2>{task.title}</h2>
+          <h2 className="task-page-header__title">{task.title}</h2>
         </Header>
       }
       contentClassName="task-page"
       redirect={redirect}
     >
       <div className="task-page__title">
-        <h1>
+        <div>
           {task.title}
-        </h1>
-        <p className="task-page__completed">
-          Состояние: <span>{task.completed ? 'Завершено' : 'Активно'}</span>
-        </p>
+        </div>
       </div>
+      <p className="task-page__completed">
+        Состояние: <span>{task.completed ? 'Завершено' : 'Активно'}</span>
+      </p>
       <div className="task-page__field">
         <div className="field">
           <div className="field__title">Дата начала</div>
